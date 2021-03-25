@@ -17,7 +17,9 @@ Follow the [tutorial](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_Ge
 ### Connect
 Download and store the `.pem/.cert` file in `.ssh` directory. Use the following command to connect,
 
-`ssh -i groundstation-ec2-access-key-ap-south-1.cer ubuntu@|██████|.ap-south-1.compute.amazonaws.com`
+```
+ssh -i groundstation-ec2-access-key-ap-south-1.cer ubuntu@|██████|.ap-south-1.compute.amazonaws.com
+```
 
 
 ## Odoo
@@ -30,4 +32,8 @@ sudo apt-get upgrade -y
 Install pip3 package manager.
 ```
 sudo apt install python3-pip -y
+```
+PostgreSQL
+```
+sudo apt install postgresql postgresql-client -y
 ```
