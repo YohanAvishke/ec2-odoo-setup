@@ -75,3 +75,10 @@ Install python dependancies from pip.
 pip3 install setuptools wheel
 pip3 install -r requirements.txt
 ```
+
+### Startup
+Startup Odoo by provideing custom addon path and database
+```
+python3 odoo-bin --addons-path=addons -d odoo
+```
+
