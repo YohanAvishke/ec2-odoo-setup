@@ -54,3 +54,9 @@ Install wkhtmltopdf for headers and footers support.
 ```
 sudo apt-get install wkhtmltopdf -y
 ```
+
+### Installation
+Download Odoo from GIT
+```
+git clone https://github.com/odoo/odoo.git
+```
