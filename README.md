@@ -3,13 +3,13 @@ All the steps I followed to setup a community version of Odoo on a free EC2 inst
 
 ## EC2
 ### Prerequisites
-Follow the [tutorial](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/get-set-up-for-amazon-ec2.html) to setup the EC2 prerequisites.Details used,
+Follow the [tutorial](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/get-set-up-for-amazon-ec2.html) to setup the EC2 prerequisites. Names and configs used,
  - **Region:** `ap-south-1` (use closest region for the users)
  - **Key Pair:** `groundstation-ec2-access-key-ap-south-1`
  - **Security Group:** `yohan_SG_apsouth1`
 
 ### Setup
-Follow the [tutorial](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html) to launch the instance. I used following configurations and details,
+Follow the [tutorial](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html) to launch the instance. Names and configs used,
  - **OS type:** Ubuntu Server 20.04 LTS (HVM), SSD Volume Type
  - **Processor:** 64 bit (x86)
  - **Storage:** 8GB
