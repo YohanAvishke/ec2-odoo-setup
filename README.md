@@ -16,6 +16,5 @@ Follow the [tutorial](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_Ge
 
 ### Connect
 Download and store the `.pem/.cert` file in `.ssh` directory. Use the following command to connect,
-```
-ssh -i groundstation-ec2-access-key-ap-south-1.cer  ec2-user@██████.ap-south-1.compute.amazonaws.com
-```
+
+`ssh -i groundstation-ec2-access-key-ap-south-1.cer ec2-user@██████.ap-south-1.compute.amazonaws.com`
