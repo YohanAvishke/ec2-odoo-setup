@@ -70,3 +70,8 @@ Create a virtual environment and activate it.
 python3 -m venv venv
 source venv/bin/activate
 ```
+Install python dependancies from pip.
+```
+pip3 install setuptools wheel
+pip3 install -r requirements.txt
+```
