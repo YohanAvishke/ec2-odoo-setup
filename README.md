@@ -34,6 +34,10 @@ Install pip3 package manager.
 ```
 sudo apt install python3-pip -y
 ```
+Install venv dependency.
+```
+sudo apt-get install python3-venv -y
+```
 Install PostgreSQL.
 ```
 sudo apt install postgresql postgresql-client -y
@@ -43,7 +47,7 @@ Create new PostgreSQL user.
 sudo -u postgres createuser -s $USER
 createdb $USER
 ```
-Install development tools and native dependencies.
+Install rest of the development tools and native dependencies.
 ```
 sudo apt install -y \
 python3-dev libxml2-dev libxslt1-dev libldap2-dev \
@@ -60,4 +64,9 @@ sudo apt-get install wkhtmltopdf -y
 Download Odoo from GIT
 ```
 git clone https://github.com/odoo/odoo.git
+```
+Create a virtual environment and activate it.
+```
+python3 -m venv venv
+source venv/bin/activate
 ```
