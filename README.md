@@ -33,12 +33,18 @@ Install pip3 package manager.
 ```
 sudo apt install python3-pip -y
 ```
-Install PostgreSQL
+Install PostgreSQL.
 ```
 sudo apt install postgresql postgresql-client -y
 ```
-Create new PostgreSQL user
+Create new PostgreSQL user.
 ```
 sudo -u postgres createuser -s $USER
 createdb $USER
+```
+Install development tools and native dependencies.
+```
+sudo apt install python3-dev libxml2-dev libxslt1-dev libldap2-dev libsasl2-dev \
+	libtiff5-dev libjpeg8-dev libopenjp2-7-dev zlib1g-dev libfreetype6-dev \
+    liblcms2-dev libwebp-dev libharfbuzz-dev libfribidi-dev libxcb1-dev libpq-dev
 ```
