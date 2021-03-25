@@ -10,11 +10,11 @@ Follow the [tutorial](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/get-se
 
 ### Setup
 Follow the [tutorial](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html) to launch the instance. I used following configurations and details,
- - **OS type:** Amazon Linux 2 AMI (HVM), SSD Volume Type
+ - **OS type:** Ubuntu Server 20.04 LTS (HVM), SSD Volume Type
  - **Processor:** 64 bit (x86)
  - **Storage:** 8GB
 
 ### Connect
 Download and store the `.pem/.cert` file in `.ssh` directory. Use the following command to connect,
 
-`ssh -i groundstation-ec2-access-key-ap-south-1.cer ec2-user@|██████|.ap-south-1.compute.amazonaws.com`
+`ssh -i groundstation-ec2-access-key-ap-south-1.cer ubuntu@|██████|.ap-south-1.compute.amazonaws.com`
