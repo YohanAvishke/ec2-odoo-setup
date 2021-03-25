@@ -18,3 +18,12 @@ Follow the [tutorial](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_Ge
 Download and store the `.pem/.cert` file in `.ssh` directory. Use the following command to connect,
 
 `ssh -i groundstation-ec2-access-key-ap-south-1.cer ubuntu@|██████|.ap-south-1.compute.amazonaws.com`
+
+
+## Odoo
+### Prerequisites
+Update the server dependancies
+```
+sudo apt-get update
+sudo apt-get upgrade -y
+```
