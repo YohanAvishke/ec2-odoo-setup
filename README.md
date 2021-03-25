@@ -7,6 +7,7 @@ Follow the [tutorial](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/get-se
  - **Region:** `ap-south-1` (use closest region for the users)
  - **Key Pair:** `groundstation-ec2-access-key-ap-south-1`
  - **Security Group:** `yohan_SG_apsouth1`
+ - **Storage:** 20GiB ([Guide to expand an existing storage size](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recognize-expanded-volume-linux.html#extend-file-system))
 
 ### Setup
 Follow the [tutorial](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html) to launch the instance. Names and configs used,
