@@ -22,8 +22,12 @@ Download and store the `.pem/.cert` file in `.ssh` directory. Use the following 
 
 ## Odoo
 ### Prerequisites
-Update the server dependancies
+Update the server dependancies.
 ```
 sudo apt-get update
 sudo apt-get upgrade -y
+```
+Install pip3 package manager.
+```
+sudo apt install python3-pip -y
 ```
