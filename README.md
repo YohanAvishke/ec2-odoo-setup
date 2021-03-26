@@ -65,10 +65,12 @@ sudo apt-get install wkhtmltopdf -y
 ## Installation
 Download Odoo from GIT
 ```
+cd /opt
 git clone https://github.com/odoo/odoo.git
 ```
 Create a virtual environment and activate it.
 ```
+cd /opt/odoo
 python3 -m venv venv
 source venv/bin/activate
 ```
@@ -84,3 +86,42 @@ Startup Odoo by provideing custom addon path and database.
 python3 odoo-bin --addons-path=addons -d odoo
 ```
 Odoo Dashboard: [http://████.ap-south-1.compute.amazonaws.com:8069](http://████.ap-south-1.compute.amazonaws.com:8069)
+
+## Background service
+Create a log file.
+```
+sudo mkdir /var/log/odoo
+```
+Custom configurations.
+```
+sudo vim /etc/odoo.conf
+```
+Paste following content in the file.
+```
+[options]
+addons_path = /opt/odoo/addons,/opt/odoo/odoo/addons
+admin_passwd = admin
+http_port = 8069
+logfile = /var/log/odoo/odoo-server.log
+```
+Configure startup file.
+```
+sudo cp /opt/odoo/debian/init /etc/init.d/odoo-init
+sudo chmod 755 /etc/init.d/odoo-init
+```
+Start Odoo on server startup.
+```
+sudo update-rc.d odoo-init defaults
+```
+Start the Odoo server
+```
+sudo /etc/init.d/odoo-init start
+```
+Check the server status
+```
+systemctl status odoo-init.service
+```
+Stop the Odoo server
+```
+sudo /etc/init.d/odoo-init stop
+```
