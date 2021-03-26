@@ -1,8 +1,8 @@
 # EC2 Odoo setup
 All the steps I followed to setup a community version of Odoo on a free EC2 instance
 
-## EC2
-### Prerequisites
+# EC2
+## Prerequisites
 Follow the [tutorial](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/get-set-up-for-amazon-ec2.html) to setup the EC2 prerequisites. Names and configs used,
  - **Region:** `ap-south-1` (use closest region for the users)
  - **Key Pair:** `groundstation-ec2-access-key-ap-south-1`
@@ -11,13 +11,13 @@ Follow the [tutorial](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/get-se
    - **Inbound Rules:** Type: `Custom TCP` - Port: `8069`
  - **Storage:** 20GiB ([Guide to expand an existing storage size](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recognize-expanded-volume-linux.html#extend-file-system))
 
-### Setup
+## Setup
 Follow the [tutorial](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html) to launch the instance. Names and configs used,
  - **OS type:** Ubuntu Server 20.04 LTS (HVM), SSD Volume Type
  - **Processor:** 64 bit (x86)
  - **Storage:** 8GB
 
-### Connect
+## Connect
 Download and store the `.pem/.cert` file in `.ssh` directory. Use the following command to connect,
 
 ```
@@ -25,8 +25,8 @@ ssh -i groundstation-ec2-access-key-ap-south-1.cer ubuntu@|██████|.a
 ```
 
 
-## Odoo
-### Prerequisites
+# Odoo
+## Prerequisites
 Update the server dependancies.
 ```
 sudo apt-get update
@@ -62,7 +62,7 @@ Install wkhtmltopdf for headers and footers support.
 sudo apt-get install wkhtmltopdf -y
 ```
 
-### Installation
+## Installation
 Download Odoo from GIT
 ```
 git clone https://github.com/odoo/odoo.git
@@ -78,9 +78,9 @@ pip3 install setuptools wheel
 pip3 install -r requirements.txt
 ```
 
-### Startup
-Startup Odoo by provideing custom addon path and database
+## Startup
+Startup Odoo by provideing custom addon path and database.
 ```
 python3 odoo-bin --addons-path=addons -d odoo
 ```
-Visit: [http://██████.ap-south-1.compute.amazonaws.com:8069](http://|██████|.ap-south-1.compute.amazonaws.com:8069)
+Odoo Dashboard: [http://████.ap-south-1.compute.amazonaws.com:8069](http://████.ap-south-1.compute.amazonaws.com:8069)
