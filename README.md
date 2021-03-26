@@ -142,6 +142,8 @@ StandardOutput=journal+console
 [Install]
 WantedBy=multi-user.target
 ```
+
+## Startup
 Reload the Systemd to create the service.
 ```
 sudo systemctl daemon-reload
@@ -150,17 +152,11 @@ Start the Odoo service and enabled it to start on boot by running.
 ```
 sudo systemctl enable --now odoo14
 ```
-
-## Startup
-Start the Odoo server.
+View the Odoo log
 ```
-sudo /etc/init.d/odoo-init start
+sudo journalctl -n 50 -f -u odoo14
 ```
-Check the server status.
+Stop the Odoo service and disable it from running on startup.
 ```
-systemctl status odoo-init.service
-```
-Stop the Odoo server.
-```
-sudo /etc/init.d/odoo-init stop
+sudo systemctl disable --now odoo14
 ```
