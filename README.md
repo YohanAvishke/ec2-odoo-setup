@@ -1,5 +1,5 @@
 # EC2 Odoo setup
-All the steps I followed to setup a community version of Odoo on a free EC2 instance
+All the steps to setup a community version of Odoo on a free EC2 instance
 
 # EC2
 ## Prerequisites
@@ -44,11 +44,6 @@ Install PostgreSQL.
 ```
 sudo apt install postgresql postgresql-client -y
 ```
-Create new PostgreSQL user.
-```
-sudo -u postgres createuser -s $USER
-createdb $USER
-```
 Install rest of the development tools and native dependencies.
 ```
 sudo apt install -y \
@@ -63,14 +58,25 @@ sudo apt-get install wkhtmltopdf -y
 ```
 
 ## Installation
+Create System user.
+```
+sudo useradd -m -d /opt/odoo -U -r -s /bin/bash odoo
+```
+Create a new PostgreSQL user.
+```
+sudo -u postgres createuser -s odoo
+```
+Change user to Odoo user.
+```
+sudo su - odoo
+```
 Download Odoo from GIT
 ```
-cd /opt
-git clone https://github.com/odoo/odoo.git
+git clone https://github.com/odoo/odoo.git /opt/odoo/odoo14
 ```
 Create a Virtual environment and activate it.
 ```
-cd /opt/odoo
+cd /opt/odoo/odoo14
 python3 -m venv venv
 source venv/bin/activate
 ```
@@ -79,6 +85,16 @@ Install Python dependancies from pip.
 pip3 install setuptools wheel
 pip3 install -r requirements.txt
 ```
+Create custom addons directory.
+```
+mkdir /opt/odoo/odoo14/custom-addons
+```
+After the installation deactivate the virtual environment and logout.
+```
+deactivate
+exit
+```
+
 
 ## Startup
 Startup Odoo by provideing custom addon path and database.
@@ -90,13 +106,20 @@ Odoo dashboard: [http://████.ap-south-1.compute.amazonaws.com:8069](http
 
 # As a Background service
 ## Prerequisites
+Create a user and add to group `sudo`.
+```
+sudo adduser --system --quiet --shell=/bin/bash --home=/odoo --gecos 'ODOO' --group odoo 
+sudo adduser odoo sudo
+```
 Create a log file.
 ```
 sudo mkdir /var/log/odoo
+sudo chown odoo:odoo /var/log/odoo
 ```
 Custom configurations.
 ```
-sudo vim /etc/odoo.conf
+sudo vim /etc/odoo/odoo.conf
+sudo chown -R odoo:odoo /etc/odoo
 ```
 Paste following content in the file.
 ```
@@ -109,6 +132,7 @@ logfile = /var/log/odoo/odoo-server.log
 Configure startup file.
 ```
 sudo cp /opt/odoo/debian/init /etc/init.d/odoo-init
+sudo chown odoo:odoo /etc/init.d/odoo-init
 sudo chmod 755 /etc/init.d/odoo-init
 ```
 Configure to start Odoo on server startup.
