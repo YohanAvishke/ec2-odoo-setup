@@ -95,7 +95,6 @@ deactivate
 exit
 ```
 
-
 ## Startup
 Startup Odoo by provideing custom addon path and database.
 ```
@@ -106,38 +105,50 @@ Odoo dashboard: [http://████.ap-south-1.compute.amazonaws.com:8069](http
 
 # As a Background service
 ## Prerequisites
-Create a user and add to group `sudo`.
+Create a custom configuration file.
 ```
-sudo adduser --system --quiet --shell=/bin/bash --home=/odoo --gecos 'ODOO' --group odoo 
-sudo adduser odoo sudo
-```
-Create a log file.
-```
-sudo mkdir /var/log/odoo
-sudo chown odoo:odoo /var/log/odoo
-```
-Custom configurations.
-```
-sudo vim /etc/odoo/odoo.conf
-sudo chown -R odoo:odoo /etc/odoo
+sudo vim /etc/odoo/odoo14.conf
 ```
 Paste following content in the file.
 ```
-[options]
-addons_path = /opt/odoo/addons,/opt/odoo/odoo/addons
+addons_path = /opt/odoo/odoo14/addons,/opt/odoo/odoo14/custom-addons
+; This is the password that allows database operations:
 admin_passwd = admin
-http_port = 8069
-logfile = /var/log/odoo/odoo-server.log
+db_host = False
+db_port = False
+db_user = odoo
+db_password = False
 ```
-Configure startup file.
+Create Systemd Unit File.
 ```
-sudo cp /opt/odoo/debian/init /etc/init.d/odoo-init
-sudo chown odoo:odoo /etc/init.d/odoo-init
-sudo chmod 755 /etc/init.d/odoo-init
+sudo vim /etc/systemd/system/odoo14.service
 ```
-Configure to start Odoo on server startup.
+Paste following content in the file.
 ```
-sudo update-rc.d odoo-init defaults
+[Unit]
+Description=Odoo14
+Requires=postgresql.service
+After=network.target postgresql.service
+
+[Service]
+Type=simple
+SyslogIdentifier=odoo14
+PermissionsStartOnly=true
+User=odoo
+Group=odoo
+ExecStart=/opt/odoo/odoo14/venv/bin/python3 /opt/odoo/odoo14/odoo-bin -c /etc/odoo/odoo14.conf
+StandardOutput=journal+console
+
+[Install]
+WantedBy=multi-user.target
+```
+Reload the Systemd to create the service.
+```
+sudo systemctl daemon-reload
+```
+Start the Odoo service and enabled it to start on boot by running.
+```
+sudo systemctl enable --now odoo14
 ```
 
 ## Startup
