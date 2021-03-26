@@ -6,7 +6,9 @@ All the steps I followed to setup a community version of Odoo on a free EC2 inst
 Follow the [tutorial](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/get-set-up-for-amazon-ec2.html) to setup the EC2 prerequisites. Names and configs used,
  - **Region:** `ap-south-1` (use closest region for the users)
  - **Key Pair:** `groundstation-ec2-access-key-ap-south-1`
- - **Security Group:** `yohan_SG_apsouth1`
+ - **Security Group** 
+   - **Name:** `yohan_SG_apsouth1`
+   - **Inbound Rules:** Type: `Custom TCP` - Port: `8069`
  - **Storage:** 20GiB ([Guide to expand an existing storage size](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recognize-expanded-volume-linux.html#extend-file-system))
 
 ### Setup
@@ -81,4 +83,4 @@ Startup Odoo by provideing custom addon path and database
 ```
 python3 odoo-bin --addons-path=addons -d odoo
 ```
-
+Visit: [http://██████.ap-south-1.compute.amazonaws.com:8069](http://|██████|.ap-south-1.compute.amazonaws.com:8069)
