@@ -68,13 +68,13 @@ Download Odoo from GIT
 cd /opt
 git clone https://github.com/odoo/odoo.git
 ```
-Create a virtual environment and activate it.
+Create a Virtual environment and activate it.
 ```
 cd /opt/odoo
 python3 -m venv venv
 source venv/bin/activate
 ```
-Install python dependancies from pip.
+Install Python dependancies from pip.
 ```
 pip3 install setuptools wheel
 pip3 install -r requirements.txt
@@ -85,9 +85,11 @@ Startup Odoo by provideing custom addon path and database.
 ```
 python3 odoo-bin --addons-path=addons -d odoo
 ```
-Odoo Dashboard: [http://████.ap-south-1.compute.amazonaws.com:8069](http://████.ap-south-1.compute.amazonaws.com:8069)
+Odoo dashboard: [http://████.ap-south-1.compute.amazonaws.com:8069](http://████.ap-south-1.compute.amazonaws.com:8069)
 
-## Background service
+
+# As a Background service
+## Prerequisites
 Create a log file.
 ```
 sudo mkdir /var/log/odoo
@@ -109,19 +111,21 @@ Configure startup file.
 sudo cp /opt/odoo/debian/init /etc/init.d/odoo-init
 sudo chmod 755 /etc/init.d/odoo-init
 ```
-Start Odoo on server startup.
+Configure to start Odoo on server startup.
 ```
 sudo update-rc.d odoo-init defaults
 ```
-Start the Odoo server
+
+## Startup
+Start the Odoo server.
 ```
 sudo /etc/init.d/odoo-init start
 ```
-Check the server status
+Check the server status.
 ```
 systemctl status odoo-init.service
 ```
-Stop the Odoo server
+Stop the Odoo server.
 ```
 sudo /etc/init.d/odoo-init stop
 ```
