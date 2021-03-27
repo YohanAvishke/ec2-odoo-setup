@@ -148,7 +148,11 @@ Reload the Systemd to create the service.
 ```
 sudo systemctl daemon-reload
 ```
-Start the Odoo service and enabled it to start on boot by running.
+Start the Odoo service.
+```
+sudo systemctl start odoo14
+```
+(optional) Start the Odoo service and enabled it to start on boot by running
 ```
 sudo systemctl enable --now odoo14
 ```
@@ -156,11 +160,15 @@ Check the status of the service.
 ```
 sudo systemctl status odoo14
 ```
-View the Odoo log
+View the Odoo log.
 ```
 sudo journalctl -n 50 -f -u odoo14
 ```
-Stop the Odoo service and disable it from running on startup.
+Stop the Odoo service.
+```
+sudo systemctl stop odoo14
+```
+(optional) Stop the Odoo service and disable it from running on startup.
 ```
 sudo systemctl disable --now odoo14
 ```
