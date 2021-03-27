@@ -152,6 +152,10 @@ Start the Odoo service and enabled it to start on boot by running.
 ```
 sudo systemctl enable --now odoo14
 ```
+Check the status of the service.
+```
+sudo systemctl status odoo14
+```
 View the Odoo log
 ```
 sudo journalctl -n 50 -f -u odoo14
