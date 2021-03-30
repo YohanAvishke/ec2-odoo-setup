@@ -180,13 +180,13 @@ sudo systemctl disable --now odoo14
 ```
 
 
-# NGINX
+# Nginx
 ## Installation
 Login as a root user. If root following command should display `root`.
 ```
 sudo whoami
 ```
-Download and Install NGINX
+Download and Install Nginx
 ```
 sudo apt install nginx -y
 ```
@@ -204,7 +204,7 @@ Not required since EC2 provide security groups. but,
 [View Guide](https://linuxize.com/post/how-to-install-nginx-on-ubuntu-20-04/#configuring-firewall) 
 
 
-# NGINX SSL cert securing
+# Securing Nginx by SSL
 Install a free Let’s Encrypt SSL certificate and configure Nginx to use the SSL certificate and enable HTTP/2.
 ## Installation
 Install `Certbot` to automates the tasks for obtaining and renewing SSL certificates and configuring web servers to use the certificates.
