@@ -194,6 +194,8 @@ Verify if the service is up and running (`Active: active (running)`)
 ```
 sudo systemctl status nginx
 ```
+
+## Firewall setup
 (Optional) Setup a firewall using `UFW`. 
 Not required since EC2 provide security groups. but,
 > "Having both is more secure and they can complement each other, 
