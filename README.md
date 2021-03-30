@@ -181,3 +181,22 @@ sudo systemctl disable --now odoo14
 
 
 # NGINX
+## Installation
+Login as a root user. If root following command should display `root`.
+```
+sudo whoami
+```
+Download and Install NGINX
+```
+sudo apt install nginx -y
+```
+Verify if the service is up and running (`Active: active (running)`)
+```
+sudo systemctl status nginx
+```
+(Optional) Setup a firewall using `UFW`. 
+Not required since EC2 provide security groups. but,
+> "Having both is more secure and they can complement each other, 
+> `IPTables` (or any other firewall) allows you to log posible atacks and even you can add dynamic rules"
+
+[View Guide](https://linuxize.com/post/how-to-install-nginx-on-ubuntu-20-04/#configuring-firewall) 
