@@ -178,3 +178,6 @@ sudo systemctl stop odoo14
 ```
 sudo systemctl disable --now odoo14
 ```
+
+
+# NGINX
