@@ -278,14 +278,63 @@ sudo ln -s /etc/nginx/sites-available/.██████.ap-south-1.compute.ama
 ```
 sudo vim /etc/nginx/nginx.conf
 
-
 http {
         ...
         server_names_hash_bucket_size 128;
         ...
 ```
-
 Update the Nginx session with the changes.
 ```
 sudo systemctl restart nginx
+```
+
+
+
+
+
+Obtain the SSL certificate files through Certbot with the webroot plugin.
+```
+sudo certbot certonly --agree-tos --email yaediriweera@gmail.com,multibajaj555@gmail.com --webroot -w /var/lib/letsencrypt/ -d ec2-65-0-138-234.ap-south-1.compute.amazonaws.com -d www.ec2-65-0-138-234.ap-south-1.compute.amazonaws.com
+```
+
+```
+sudo nano /etc/nginx/sites-available/ec2-65-0-138-234.ap-south-1.compute.amazonaws.com.conf
+```
+Add following code to the file.
+```
+server {
+    listen 80;
+    server_name www.ec2-65-0-138-234.ap-south-1.compute.amazonaws.com ec2-65-0-138-234.ap-south-1.compute.amazonaws.com;
+
+    include snippets/letsencrypt.conf;
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    server_name www.example.com;
+
+    ssl_certificate /etc/letsencrypt/live/ec2-65-0-138-234.ap-south-1.compute.amazonaws.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/ec2-65-0-138-234.ap-south-1.compute.amazonaws.com/privkey.pem;
+    ssl_trusted_certificate /etc/letsencrypt/live/ec2-65-0-138-234.ap-south-1.compute.amazonaws.com/chain.pem;
+    include snippets/ssl.conf;
+    include snippets/letsencrypt.conf;
+
+    return 301 https://ec2-65-0-138-234.ap-south-1.compute.amazonaws.com$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    server_name ec2-65-0-138-234.ap-south-1.compute.amazonaws.com;
+
+    ssl_certificate /etc/letsencrypt/live/ec2-65-0-138-234.ap-south-1.compute.amazonaws.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/ec2-65-0-138-234.ap-south-1.compute.amazonaws.com/privkey.pem;
+    ssl_trusted_certificate /etc/letsencrypt/live/ec2-65-0-138-234.ap-south-1.compute.amazonaws.com/chain.pem;
+    include snippets/ssl.conf;
+    include snippets/letsencrypt.conf;
+}
+```
+Update the Nginx session with the changes.
+```
+sudo systemctl reload nginx
 ```
