@@ -202,3 +202,90 @@ Not required since EC2 provide security groups. but,
 > `IPTables` (or any other firewall) allows you to log posible atacks and even you can add dynamic rules"
 
 [View Guide](https://linuxize.com/post/how-to-install-nginx-on-ubuntu-20-04/#configuring-firewall) 
+
+
+# NGINX SSL cert securing
+Install a free Let’s Encrypt SSL certificate and configure Nginx to use the SSL certificate and enable HTTP/2.
+## Installation
+Install `Certbot` to automates the tasks for obtaining and renewing SSL certificates and configuring web servers to use the certificates.
+```
+sudo apt install certbot -y
+```
+
+## Obtaining SSL certificate
+Generate a new set of 2048 bit DH(Diffie–Hellman key exchange) parameters.
+```
+sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
+```
+Make a directory to verify that the requested domain resolves to the server where certbot runs(using `Webroot` plugin).
+```
+sudo mkdir -p /var/lib/letsencrypt/.well-known
+```
+Make the directory writable by Nginx server.
+```
+sudo chgrp www-data /var/lib/letsencrypt
+sudo chmod g+s /var/lib/letsencrypt
+```
+Create 2 files to include base snippets for all Nginx server blocks.
+1. `sudo vim /etc/nginx/snippets/letsencrypt.conf`
+   ```
+   location ^~ /.well-known/acme-challenge/ {
+     allow all;
+     root /var/lib/letsencrypt/;
+     default_type "text/plain";
+     try_files $uri =404;
+   }
+   ```
+2. `sudo vim /etc/nginx/snippets/ssl.conf` - Chippers recommended by Mozilla, Enables OCSP Stapling, HTTP Strict Transport Security (HSTS) and Enforces few security‑focused HTTP headers.
+   ```
+   ssl_dhparam /etc/ssl/certs/dhparam.pem;
+
+   ssl_session_timeout 1d;
+   ssl_session_cache shared:SSL:10m;
+   ssl_session_tickets off;
+
+   ssl_protocols TLSv1.2 TLSv1.3;
+   ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384;
+   ssl_prefer_server_ciphers on;
+
+   ssl_stapling on;
+   ssl_stapling_verify on;
+   resolver 8.8.8.8 8.8.4.4 valid=300s;
+   resolver_timeout 30s;
+
+   add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+   add_header X-Frame-Options SAMEORIGIN;
+   add_header X-Content-Type-Options nosniff;
+   ```
+Create the domain server block file.
+```
+sudo vim /etc/nginx/sites-available/██████.ap-south-1.compute.amazonaws.com.conf
+```
+Add following code to the file.
+```
+server {
+  listen 80;
+  server_name ██████.ap-south-1.compute.amazonaws.com www.██████.ap-south-1.compute.amazonaws.com;
+
+  include snippets/letsencrypt.conf;
+}
+```
+Enable the new server block by creating a symbolic link to `sites-enabled` directory.
+```
+sudo ln -s /etc/nginx/sites-available/.██████.ap-south-1.compute.amazonaws.com.conf /etc/nginx/sites-enabled/
+```
+(Optional) Add support for long domain names (Available sizes 64, 128, 256, 512, etc.)
+```
+sudo vim /etc/nginx/nginx.conf
+
+
+http {
+        ...
+        server_names_hash_bucket_size 128;
+        ...
+```
+
+Update the Nginx session with the changes.
+```
+sudo systemctl restart nginx
+```
