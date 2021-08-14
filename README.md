@@ -113,6 +113,7 @@ Odoo dashboard: [http://████.ap-south-1.compute.amazonaws.com:8069](http
 ## Prerequisites
 Create a custom configuration file.
 ```
+mkdir /etc/odoo
 sudo vim /etc/odoo/odoo14.conf
 ```
 Paste following content in the file.
