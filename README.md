@@ -80,7 +80,7 @@ cd /opt/odoo/odoo14
 python3 -m venv venv
 source venv/bin/activate
 ```
-Comment-out `libsass==0.17.0` since it gets stuck in the build stage.
+Comment-out `libsass==0.17.0` from `requirements.txt`, since it gets stuck in the build stage.
 Execute follow command to fix `libsass` issue.
 But, beware, `0.20.0` does not work with Odoo Studio App.
 ```
