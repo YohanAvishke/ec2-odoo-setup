@@ -118,13 +118,16 @@ sudo vim /etc/odoo/odoo14.conf
 ```
 Paste following content in the file.
 ```
+[options]
 addons_path = /opt/odoo/odoo14/addons,/opt/odoo/odoo14/custom-addons
 ; This is the password that allows database operations:
-admin_passwd = admin
+admin_passwd = z92v-h3te-bqjm
 db_host = False
 db_port = False
 db_user = odoo
 db_password = False
+limit_time_cpu = 150
+limit_time_real = 300
 ```
 Create Systemd Unit File.
 ```
