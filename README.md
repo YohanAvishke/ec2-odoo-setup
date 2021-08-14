@@ -2,6 +2,7 @@
 All the steps to setup a community version of Odoo on a free EC2 instance
 
 # EC2
+Only this step is EC2 specific. Rest can be used with any VPN provider.
 ## Prerequisites
 Follow the [tutorial](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/get-set-up-for-amazon-ec2.html) to setup the EC2 prerequisites. Names and configs used,
  - **Region:** `ap-south-1` (use closest region for the users)
