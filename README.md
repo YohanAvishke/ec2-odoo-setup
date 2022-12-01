@@ -63,6 +63,10 @@ Create System user.
 ```
 sudo useradd -m -d /opt/odoo -U -r -s /bin/bash odoo
 ```
+Setup a password for user (Make sure to remember the password).
+```
+sudo passwd odoo
+```
 Create a new PostgreSQL user.
 ```
 sudo -u postgres createuser -s odoo
